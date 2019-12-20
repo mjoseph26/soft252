@@ -35,8 +35,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="usernameTxt" pref="90" max="32767" attributes="0"/>
                                   <Component id="passwordTxt" max="32767" attributes="0"/>
-                                  <Component id="usernameTxt" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -97,9 +97,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="usernameTxt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordTxt">
     </Component>
@@ -107,6 +104,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="registerBtn">
       <Properties>

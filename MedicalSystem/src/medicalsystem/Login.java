@@ -5,6 +5,8 @@
  */
 package medicalsystem;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author mjose
@@ -43,9 +45,12 @@ public class Login extends javax.swing.JFrame {
 
         passwordLbl.setText("Password:");
 
-        usernameTxt.setText("jTextField1");
-
         loginBtn.setText("Submit");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         registerBtn.setText("Register");
 
@@ -64,8 +69,8 @@ public class Login extends javax.swing.JFrame {
                                     .addComponent(passwordLbl))
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(passwordTxt)
-                                    .addComponent(usernameTxt)))
+                                    .addComponent(usernameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                    .addComponent(passwordTxt)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(loginBtn)
                                 .addGap(32, 32, 32)
@@ -98,6 +103,34 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        String username = usernameTxt.getText();
+        char [] passwordArray = passwordTxt.getPassword();
+        String password = new String(passwordArray);
+        boolean result = checkDetails(username,password);
+        if(result = true)
+        {
+            usernameTxt.setText(null);
+            passwordTxt.setText(null);
+        }
+        //THIS WORKS
+        
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    public boolean checkDetails(String username, String password)
+    {
+        ArrayList<UserAccount> list = Utility.ReadFile();
+        boolean correct = false;
+        for(int i = 0; i < list.size();i++)
+        {
+            if((list.get(i).getId() == username)&&(list.get(i).getPassword()== password))
+            {
+                correct = true;
+            }
+        }
+        
+            return correct;
+    }
     /**
      * @param args the command line arguments
      */

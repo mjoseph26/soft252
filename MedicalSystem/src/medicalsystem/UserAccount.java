@@ -5,6 +5,8 @@
  */
 package medicalsystem;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author mjose
@@ -69,9 +71,19 @@ public class UserAccount {
         this.address = address;
     }
     
-    public static boolean checkDetails()
+    public static boolean checkDetails(String username, String password)
     {
-        return true;
+        ArrayList<UserAccount> list = Utility.ReadFile();
+        boolean correct = false;
+        for(int i = 0; i < list.size();i++)
+        {
+            if((list.get(i).getId() == username)&&(list.get(i).getPassword()== password))
+            {
+                correct = true;
+            }
+        }
+        
+            return correct;
     }
     
 }

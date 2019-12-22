@@ -14,9 +14,11 @@ import java.util.ArrayList;
  */
 public class Utility {
     
-    public ArrayList<UserAccount> ReadFile()
+    public static ArrayList<UserAccount> userAccounts = new ArrayList<>();
+    
+    public static ArrayList<UserAccount> ReadFile()
     {
-        ArrayList<UserAccount> userAccounts = new ArrayList<>();
+        
         
         try 
         {
@@ -45,11 +47,18 @@ public class Utility {
         return userAccounts;
     }
     
-    public void WriteFile()
+    public static void AddToFile(String id,String pass,String name, String lname,String address) throws IOException
     {
-        
-        
-        
+        FileWriter fw = new FileWriter("accounts.txt",true);
+        fw.write(id+"<>");
+        fw.write(pass+"<>");
+        fw.write(name+"<>");
+        fw.write(lname+"<>");
+        fw.write(address+"\n");
+        fw.close();
     }
-    
 }
+
+    
+    
+

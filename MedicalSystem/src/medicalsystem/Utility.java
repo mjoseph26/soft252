@@ -18,8 +18,6 @@ public class Utility {
     
     public static ArrayList<UserAccount> ReadFile()
     {
-        
-        
         try 
         {
             FileReader fileReader = new FileReader("accounts.txt");
@@ -57,6 +55,41 @@ public class Utility {
         fw.write(address+"\n");
         fw.close();
     }
+    
+    public static void RemoveFromFile() throws IOException
+    {
+        //Rewrite the file content without the deleted element
+        FileWriter fw = new FileWriter("accounts.txt");
+        for(UserAccount a : userAccounts)
+        {
+            fw.write(a.getId()+"<>");
+            fw.write(a.getPassword()+"<>");
+            fw.write(a.getName()+"<>");
+            fw.write(a.getSurname()+"<>");
+            fw.write(a.getAddress()+"\n");
+        }
+        
+            fw.close();
+        
+    }
+    
+    public static UserAccount currentUser(String id)
+    {
+        //PASS THE ID ENTERED INTO THE LOG IN FORM
+        //FIND THE OBJECT WITH THAT ID AND SET THAT AS THE CURRENT OBJECT
+        UserAccount u = null;
+        for(int i = 0; i < userAccounts.size();i++)
+        {
+            System.out.println(userAccounts.get(i).getId());
+            if(userAccounts.get(i).getId() == null ? id == null : userAccounts.get(i).getId().equals(id))
+            {
+                u = Utility.userAccounts.get(i);
+            }
+        }
+        return u;
+    }
+
+
 }
 
     

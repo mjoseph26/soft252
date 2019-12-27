@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * @author mjose
  */
 public class Login extends javax.swing.JFrame {
+    
+    public UserAccount u;
 
     /**
      * Creates new form Login
@@ -35,7 +37,6 @@ public class Login extends javax.swing.JFrame {
         usernameTxt = new javax.swing.JTextField();
         passwordTxt = new javax.swing.JPasswordField();
         loginBtn = new javax.swing.JButton();
-        registerBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,8 +53,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        registerBtn.setText("Register");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,22 +62,18 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usernameLbl)
-                                    .addComponent(passwordLbl))
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usernameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                    .addComponent(passwordTxt)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(loginBtn)
-                                .addGap(32, 32, 32)
-                                .addComponent(registerBtn))))
+                            .addComponent(usernameLbl)
+                            .addComponent(passwordLbl))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleLbl)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(usernameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                .addComponent(passwordTxt))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(titleLbl)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addGap(103, 103, 103)
+                        .addComponent(loginBtn)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,11 +88,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLbl)
                     .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginBtn)
-                    .addComponent(registerBtn))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(loginBtn)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,30 +99,62 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         String username = usernameTxt.getText();
         char [] passwordArray = passwordTxt.getPassword();
+        
+        u = Utility.currentUser(username);
+        //ADD THIS TO THE LOGIN PAGE
+        //PASS THIS INFO INTO A METHOD TO GET THE CURRENTUSER
+        //while(i < array.size()){
+        //if id == array.get(i).userId
+        
+        //array.get(i).userid
+        //password and other info
+        //or return the object
+        
         String password = new String(passwordArray);
         boolean result = checkDetails(username,password);
-        if(result = true)
+        if(result == true)
         {
             usernameTxt.setText(null);
             passwordTxt.setText(null);
+            if(username.startsWith("A")|| username.startsWith("a"))
+            {
+                AdminPage page = new AdminPage();
+                page.setVisible(true);
+            }
+            else if(username.startsWith("D"))
+            {
+                DoctorPage page = new DoctorPage();
+                page.setVisible(true);
+            }
+            else
+            {
+                PatientPage page = new PatientPage();
+                page.setVisible(true);
+            }
+            
+            
+            //CHECK THE USER TYPE AFTER THE USER HAS LOGGED IN
         }
         //THIS WORKS
         
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    public boolean checkDetails(String username, String password)
+    public static boolean checkDetails(String username, String password)
     {
         ArrayList<UserAccount> list = Utility.ReadFile();
         boolean correct = false;
         for(int i = 0; i < list.size();i++)
         {
-            if((list.get(i).getId() == username)&&(list.get(i).getPassword()== password))
+            System.out.println(list.get(i));
+            if((list.get(i).getId().equals(username)) &&(list.get(i).getPassword().equals(password)))
             {
                 correct = true;
             }
+            else{
+                correct = false;
+            }
         }
-        
-            return correct;
+        return correct;
     }
     /**
      * @param args the command line arguments
@@ -170,7 +195,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton loginBtn;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JPasswordField passwordTxt;
-    private javax.swing.JButton registerBtn;
     private javax.swing.JLabel titleLbl;
     private javax.swing.JLabel usernameLbl;
     private javax.swing.JTextField usernameTxt;

@@ -5,7 +5,9 @@
  */
 package medicalsystem;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -112,21 +114,17 @@ public class Login extends javax.swing.JFrame {
         
         String password = new String(passwordArray);
         boolean result = checkDetails(username,password);
+        System.out.println(result);
         if(result == true)
         {
             usernameTxt.setText(null);
             passwordTxt.setText(null);
-            if(username.startsWith("A")|| username.startsWith("a"))
-            {
-                AdminPage page = new AdminPage();
-                page.setVisible(true);
-            }
-            else if(username.startsWith("D"))
+            if(username.startsWith("D"))
             {
                 DoctorPage page = new DoctorPage();
                 page.setVisible(true);
             }
-            else
+            if(username.startsWith("P"))
             {
                 PatientPage page = new PatientPage();
                 page.setVisible(true);
@@ -141,20 +139,49 @@ public class Login extends javax.swing.JFrame {
 
     public static boolean checkDetails(String username, String password)
     {
-        ArrayList<UserAccount> list = Utility.ReadFile();
-        boolean correct = false;
-        for(int i = 0; i < list.size();i++)
+        
+        //Scanner x;
+        boolean found = false;
+        String tempUsername = "";
+        String tempPassword = "";
+        
+        for(UserAccount u : Utility.userAccounts)
         {
-            System.out.println(list.get(i));
-            if((list.get(i).getId().equals(username)) &&(list.get(i).getPassword().equals(password)))
+            if(username == u.getId() && (password == u.getPassword()))
             {
-                correct = true;
-            }
-            else{
-                correct = false;
+                found = true;
             }
         }
-        return correct;
+        
+        return true;
+    }
+        
+        
+       /* 
+        try
+        {
+            x = new Scanner(new File("accounts.txt"));
+            x.useDelimiter("[,\n]");
+            
+            while(x.hasNext() && !found)
+            {
+                tempUsername = x.next();
+                tempPassword = x.next();
+                
+                if(tempUsername.trim().equals(username) && tempPassword.trim().equals(password))
+                {
+                    found = true;
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error");
+        }
+        
+        return found;
+    
+        
     }
     /**
      * @param args the command line arguments

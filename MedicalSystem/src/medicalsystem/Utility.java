@@ -62,8 +62,49 @@ public class Utility {
         }
         return userAccounts;
     }
+    
+        public static ArrayList<ArrayList<String>> readAppointments()
+    {
+        ArrayList<ArrayList<String>> appointments = new ArrayList<ArrayList<String>>();
+        
+        try {
+            FileReader fr = new FileReader("appointments.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            String patient = "";
+            while ((line = br.readLine()) != null) {
+                String[] account = line.split(",");
+                String date = account[0];
+                String doctor = account[1];
+                patient = account[2];
+                String notes = account[3];
+                String prescription = account[4];
+                String rating = account[5];
+                String feedback = account[6];
+                
+                ArrayList<String> info = new ArrayList<>();
+                info.add(date);
+                info.add(doctor);
+                info.add(patient);
+                info.add(notes);
+                info.add(prescription);
+                info.add(rating);
+                info.add(feedback);
+                appointments.add(info);
+            
+            
+            }
+            Patient p = (Patient)Login.getCurrentUser(patient);
+            p.setMedicalHistory(appointments);
+            
+        
+    }catch(Exception e)
+    {
+        System.out.println(e);
+    }
+        return appointments;
 
-
+    }
 
 //P,P,P,P,P,P,P
 //1
@@ -127,46 +168,6 @@ public class Utility {
             }
         }
         
-        
-                //Rewrite the file content without the deleted element
-        
-//        catch(Exception e)
-//        {
-//            
-//        }
-////        try 
-////        {
-////            FileWriter fw = new FileWriter("accounts.txt");
-////            BufferedWriter bw = new BufferedWriter(fw);
-////            PrintWriter pw = new PrintWriter(bw);
-////            
-////            ArrayList<UserAccount> users = ReadFile();
-////            UserAccount userDelete = null;
-////            
-////            for(int i =0; i <users.size();i++)
-////            {
-////                if(users.get(i).getId().equals(uId))
-////                {
-////                    userDelete = users.get(i);
-////                    
-////                }
-////            }
-////            users.remove(userDelete);
-////            
-////            for(UserAccount u:users)
-////            {
-////                System.out.println(u.getId());
-////                pw.println(u.getId()+","+u.getPassword()+","+u.getName()+","+u.getSurname()+","+u.getAddress());
-////            }
-////            
-////            pw.flush();
-////            pw.close();
-//            
-//        }
-//        catch(Exception e)
-//        {
-//            System.out.println(e);
-//        }
     }
 
     

@@ -5,9 +5,6 @@
  */
 package medicalsystem;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -32,37 +29,6 @@ public class Register extends javax.swing.JFrame {
     private void initComponents() {
 
         titleLbl = new javax.swing.JLabel();
-        idLbl = new javax.swing.JLabel();
-        passLbl = new javax.swing.JLabel();
-        nameLbl = new javax.swing.JLabel();
-        surnameLbl = new javax.swing.JLabel();
-        addressLbl = new javax.swing.JLabel();
-        idTxt = new javax.swing.JTextField();
-        nameTxt = new javax.swing.JTextField();
-        surnameTxt = new javax.swing.JTextField();
-        addressTxt = new javax.swing.JTextField();
-        passTxt = new javax.swing.JPasswordField();
-        registerBtn = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        titleLbl.setText("Register");
-
-        idLbl.setText("User ID:");
-
-        passLbl.setText("Password:");
-
-        nameLbl.setText("Name:");
-
-        surnameLbl.setText("Surname:");
-
-        addressLbl.setText("Address:");
-
-        idTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idTxtActionPerformed(evt);
-            }
-        });
 
         registerBtn.setText("Submit");
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +37,7 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,88 +45,18 @@ public class Register extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(titleLbl))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(idLbl)
-                            .addComponent(passLbl)
-                            .addComponent(nameLbl)
-                            .addComponent(surnameLbl)
-                            .addComponent(addressLbl))
-                        .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(surnameTxt)
-                            .addComponent(addressTxt)
-                            .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passTxt)
-                            .addComponent(nameTxt))))
-                .addGap(129, 129, 129))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(registerBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(titleLbl)
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idLbl)
-                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passLbl)
-                    .addComponent(passTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLbl)
-                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(surnameLbl)
-                    .addComponent(surnameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addressLbl)
-                    .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(registerBtn)
-                .addContainerGap(35, Short.MAX_VALUE))
+
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idTxtActionPerformed
 
-    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        // TODO add your handling code here:
-        String id = idTxt.getText();
-        char [] pass = passTxt.getPassword();
-        String password = new String(pass);
-        String name = nameTxt.getText();
-        String lastname = surnameTxt.getText();
-        String address = addressTxt.getText();
-        UserAccount a = new UserAccount(id,password,name,lastname,address);
-        Utility.userAccounts.add(a);
-        try {
-            Utility.AddToFile(id,password,name,lastname,address);
-//        try {
-//            Utility.WriteFile(id,password,name,lastname,address);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
     }//GEN-LAST:event_registerBtnActionPerformed
 
     /**
@@ -198,17 +95,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addressLbl;
-    private javax.swing.JTextField addressTxt;
-    private javax.swing.JLabel idLbl;
-    private javax.swing.JTextField idTxt;
-    private javax.swing.JLabel nameLbl;
-    private javax.swing.JTextField nameTxt;
-    private javax.swing.JLabel passLbl;
-    private javax.swing.JPasswordField passTxt;
-    private javax.swing.JButton registerBtn;
-    private javax.swing.JLabel surnameLbl;
-    private javax.swing.JTextField surnameTxt;
+
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 }
